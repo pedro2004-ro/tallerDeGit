@@ -1,0 +1,18 @@
+problema absoluto (z: Z) : Z {
+	requiere: {True}
+	asegura: {x >= 0 -> res = x}
+	asegura: {x < 0 -> res = -x}
+}
+
+problema maximoabsoluto (x: Z, y: Z) : Z {
+	requiere: {True}
+	asegura: {absoluto(x) >= absoluto(y) -> res = absoluto(x)}
+	asegura: {absoluto(y) > absoluto(x) -> res = absoluto(y)}
+	
+problema algunoEs0 (x: Z, y: Z) : Bool {
+	requiere: {True}
+	asegura: {(x == 0) || (y == 0) -> res = True}
+	asegura: {(x /= 0) && (y /= 0) -> res = False}
+}
+
+problema ambos
