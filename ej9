@@ -1,0 +1,45 @@
+f1 toma un argumento n y devuelve 1 si n es 0, 0 para todos los demas casos
+
+problema f1(n: R) : R {
+    requiere: {True}
+    asegura: {res=1 <-> n==0}
+    asegura: {res=0 <-> n/=0}
+}
+
+f2 toma un argumento n y devuelve 15 cuando n es 1, -15 cuando n es -1
+
+problema f2(n: R) : R {
+    requiere: {True}
+    asegura: {res=15 <-> n==1}
+    asegura: {res=-15 <-> n==-1}
+}
+
+f3 toma un argumento z y devuelve 7 cuando z es más pequeño o igual a 9, 5 cuando z es mayor a 9
+
+problema f3(z: R) : R {
+    requiere: {True}
+    asegura: {res=7 <-> n<=9}
+    asegura: {res=5 <-> n>9}
+}
+
+f4 toma dos argumentos y devuelve el promedio
+
+problema f4(x: R, y: R) : R {
+    requiere: {True}
+    asegura: {res es el promedio de x e y}
+}
+
+f5 toma una tupla y devuelve el promedio de sus miembros
+
+problema f5(t: R X R ) : R {
+    requiere: {True}
+    asegura: {res es el promedio de t(0) y t(1)}
+}
+
+f6 toma un argumento en R y otro en Z. devuelve True si Z es la parte real de R, False si no lo es
+
+problema f6(r: R, z: Z) : Bool {
+    requiere: {True}
+    asegura: {res = True <-> z es la parte real de r}
+    asegura: {res = False en todos los otros casos}
+}
