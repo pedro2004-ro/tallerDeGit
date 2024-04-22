@@ -1,4 +1,4 @@
-longitud :: [t] -> Integer
+longitud :: [t] -> Int
 longitud [] = 0
 longitud (x : xs) = 1 + longitud xs
 
@@ -112,7 +112,7 @@ sacarBlancosRepetidos [x, y] | x == ' ' && y == ' ' = [' ']
 sacarBlancosRepetidos (x : y : xs) | x == ' ' && y == ' '  = sacarBlancosRepetidos (x : xs)
                                    | otherwise = x : sacarBlancosRepetidos (y : xs)
 
-contarPalabras :: [Char] -> Integer
+contarPalabras :: [Char] -> Int
 contarPalabras [] = 0
 contarPalabras [x] | x == ' ' = 0
                    | otherwise = 1
@@ -121,3 +121,32 @@ contarPalabras [x, y] | x == ' ' && y == ' ' = 0
 contarPalabras (x : y : xs) | x /= ' ' && y == ' ' = 1 + contarPalabras (y : xs)
                             | otherwise = contarPalabras (y : xs)
 
+
+nPalabra :: Int -> [Char] -> [Char]
+nPalabra _ [] = []
+nPalabra _ [x] = [x]
+nPalabra 1 (x : xs) | x == ' ' = nPalabra 1 xs
+                    | head xs /= ' ' = x : nPalabra 1 xs
+                    | head xs == ' ' = [x]
+nPalabra n (x : xs) | x == ' ' = nPalabra n xs
+                    | head xs /= ' ' = nPalabra n xs
+                    | head xs == ' ' = nPalabra (n-1) xs
+
+
+rangoPalabras :: Int -> Int -> [Char] -> [[Char]]
+rangoPalabras n m xs | n == m = [nPalabra n xs]
+                     | otherwise = [nPalabra n xs] ++ rangoPalabras (n+1) m xs
+
+palabras :: [Char] -> [[Char]]
+palabras [] = [[]]
+palabras xs = rangoPalabras 1 (contarPalabras xs) xs
+
+maximaLongitud :: [[Char]] -> [Char]
+maximaLongitud [[x]] = [x]
+maximaLongitud [xs, ys] | longitud xs >= longitud ys = xs
+                        | otherwise = ys
+maximaLongitud (x : xs) | longitud x >= longitud (head xs) = maximaLongitud (x : tail xs)
+                        | otherwise = maximaLongitud xs
+
+palabraMasLarga :: [Char] -> [Char]
+palabraMasLarga st = maximaLongitud (palabras st)
