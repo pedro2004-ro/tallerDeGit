@@ -71,7 +71,7 @@ maximoAux x y | x >= y = x
 
 maximo :: [Integer] -> Integer
 maximo [x] = x
-maximo (x : xs) = maximoAux x (maximo xs) 
+maximo (x : xs) = maximoAux x (maximo xs)
 
 sumarN :: Integer -> [Integer] -> [Integer]
 sumarN n [x] = [(x + n)]
@@ -150,3 +150,44 @@ maximaLongitud (x : xs) | longitud x >= longitud (head xs) = maximaLongitud (x :
 
 palabraMasLarga :: [Char] -> [Char]
 palabraMasLarga st = maximaLongitud (palabras st)
+
+aplanar :: [[Char]] -> [Char]
+aplanar [] = []
+aplanar (x : xs) = x ++ aplanar xs
+
+aplanarConBlancos :: [[Char]] -> [Char]
+aplanarConBlancos [] = []
+aplanarConBlancos [x] = x
+aplanarConBlancos (x : xs) = x ++ " " ++ aplanarConBlancos xs
+
+aplanarConNBlancos :: [[Char]] -> Integer -> [Char]
+aplanarConNBlancos [] _ = []
+aplanarConNBlancos [x] _ = x
+aplanarConNBlancos (x : xs) n = x ++ n_espacios n ++ aplanarConNBlancos xs n
+                              where n_espacios 1 = " "
+                                    n_espacios n = " " ++ n_espacios (n-1)
+
+sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada [] = []
+sumaAcumulada [x] = [x]
+sumaAcumulada (x : y : xs) = x : sumaAcumulada ((x + y) : xs)
+
+menorDivisor :: Integer -> Integer -> Integer -> Integer
+menorDivisor 1 _ _ = 1
+menorDivisor n i j | i >= j && mod n i == 0 = i
+                   | n == i = n
+                   | otherwise = menorDivisor n (i+1) j
+
+esPrimo :: Integer -> Bool
+esPrimo n = menorDivisor n 2 2 == n
+
+divisores :: Integer -> Integer -> [Integer]
+divisores n = menorDivisor n 2 2 : siguienteDivisor
+
+{- factorizar :: Integer -> [Integer]
+factorizar n | esPrimo n = [n]
+             | 
+ -}
+
+{- descomponerEnPrimos :: [Integer] -> [[Integer]]
+descomponerEnPrimos  -}
