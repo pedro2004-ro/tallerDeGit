@@ -13,8 +13,29 @@ desplazar caracter n | esMinuscula c_desplazado = c_desplazado
                      | otherwise = desplazar caracter (n+26)
                      where c_desplazado = (chr (ord caracter + n))
 
-{- cifrar :: String -> Int -> String
+cifrar :: String -> Int -> String
 cifrar [] _ = []
-cifrar [c] n = [desplazar c n]
-cifrar (x : xs) n = desplazar x n : cifrar xs n -}
+cifrar (x : xs) n = desplazar x n : cifrar xs n
 
+descifrar :: String -> Int -> String
+descifrar lista n = cifrar lista (-n)
+
+cifrarListaAux :: [String] -> Int -> [String]
+cifrarListaAux [] _ = []
+cifrarListaAux (frase : frases) n = cifrar frase n : cifrarListaAux frases (n+1)
+
+
+cifrarLista :: [String] -> [String]
+cifrarLista frases = cifrarListaAux frases 0
+
+contarLetra :: String -> Char -> Int
+contarLetra [] _ = 0
+contarLetra (letra : frase) caracter | caracter == letra = 1 + contarLetra frase caracter
+                                     | otherwise = contarLetra frase caracter
+
+contarLetrasAux :: String -> String -> [Int]
+contarLetrasAux [] _ = [0]
+contarLetrasAux (letra : abecedario) frase = contarLetra frase letra : contarLetrasAux abecedario frase
+
+contarLetras :: String -> [Int] 
+contarLetras frase = contarLetrasAux "abcdefghijklmnopqrstuvwxyz" frase 
