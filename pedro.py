@@ -1,3 +1,4 @@
+import random
 def pertenece(lista: list[int], e: int) -> bool:
     res: bool = False
     for i in lista:
@@ -240,4 +241,78 @@ def estudiantes() -> list[str]:
         estudiante = input("Ingrese estudiante: ")
     return res
 
-print(estudiantes())
+def aMayus(c: str) -> str:
+    res: str = ""
+    if esMinus(c):
+        res = chr(ord(c) - 32)
+    else:
+        res = c
+    return res
+
+def SUBE() -> list[tuple[str, int]]:
+    res: list[tuple[str, int]] = []
+    tipo: str = aMayus(input("Ingrese 'C' para cargar créditos y 'D' para descontar créditos: "))
+    while tipo != "X":
+        monto: int = int(input("Ingrese el monto: "))
+        res.append((tipo, monto))
+        tipo = aMayus(input("Ingrese 'C' para cargar créditos y 'D' para descontar créditos: "))
+    return res
+
+def valor_carta(carta: int) -> float:
+    if carta == 10 or carta == 11 or carta == 12:
+        valor: float = 0.5
+    else:
+        valor: float = carta
+    return valor
+
+def quitar_una(carta: int, lista: list[int]):
+    i: int = 0
+    while i < longitud(lista):
+        
+
+
+
+def siete_y_medio() -> list[int]:
+    usuario: str = ""
+    suma_cartas: float = 0
+    estado: str = ""
+    res: list[int] = []
+
+    mazo: list[int] = [1, 1, 1, 1,
+                       2, 2, 2, 2,
+                       3, 3, 3, 3,
+                       4, 4, 4, 4,
+                       5, 5, 5, 5,
+                       6, 6, 6, 6,
+                       7, 7, 7, 7,
+                       10, 10, 10, 10,
+                       11, 11, 11, 11,
+                       12, 12, 12, 12]
+
+    while estado != "Perdio" and usuario != "P" and usuario != "p":
+        carta: int = 9
+        while carta == 9 or carta == 8:
+            carta = random.randint(1, 12)
+
+        res.append(carta)
+        suma_cartas += valor_carta(carta)
+        print("Su carta es: " + str(carta))
+        print("Lleva " + str(suma_cartas) + " puntos")
+        
+        if suma_cartas > 7.5:
+            estado = "Perdio"
+        if estado != "Perdio":
+            usuario = input("Ingrese 'P' para plantarse o ENTER para recibir otra carta: ")
+
+    if estado == "Perdio":
+        print("Usted ha perdido.")
+
+    return res
+
+l = [1, 2, 3, 1, 4, 3, 1]
+
+quitar_una(1, l)
+
+print(l)
+        
+    
