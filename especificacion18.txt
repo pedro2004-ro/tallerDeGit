@@ -1,0 +1,6 @@
+problema atencion_a_clientes(in c: Cola[(str, int, bool, bool)]) -> Cola[(str, int, bool, bool)] {
+ 	requiere: {para todo i, 0<=i<|c|, |c[i][0]| > 0 y c[i][1] >= 1 000 000}
+ 	asegura: {|c| = |res|}
+ 	asegura: {para todo i, 0<=i<|res| existe algun j, 0<=j<|c| tal que res[i] = c[j]}
+ 	asegura: {para todo i,j, 0<=i<|res|, 0<=j<|res|, (res[i][3] = True and res[j][3] = False) 
+
